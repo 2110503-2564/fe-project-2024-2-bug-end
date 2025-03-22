@@ -1,4 +1,3 @@
-import styles from './topmenu.module.css'
 import Image from 'next/image'
 import TopMenuItem from './TopMenuItem';
 import { getServerSession } from 'next-auth';
@@ -13,8 +12,8 @@ export default async function TopMenu() {
         <div className="h-[50px] bg-white fixed top-0 left-0 right-0 z-30 border-t border-b border-gray-300 flex flex-row">
             <Image src={'/img/logo.png'} className="h-full w-auto"
             alt='logo' width={0} height={0} sizes="100vh"/>
-            <TopMenuItem title='Select Car' pageRef='/car'/>
-            <TopMenuItem title='Reservations' pageRef='/reservations'/>
+            <TopMenuItem title='Hotel' pageRef='/car'/>
+            <TopMenuItem title='Booking' pageRef='/reservations'/>
             <TopMenuItem title='About' pageRef='/about'/>
             <TopMenuItem title='Cart' pageRef='/cart'/>
 

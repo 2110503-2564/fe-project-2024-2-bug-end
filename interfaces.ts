@@ -2,8 +2,8 @@ export interface BookingItem {
     HotelId: string
     hotelName: string
     numOfDays: number
-    pickupDate: string
-    returnDate: string
+    checkInDate: string
+    checkOutDate: string
     location: string
 }
 

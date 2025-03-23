@@ -1,10 +1,16 @@
 export default async function getHotels() {
+    const token = typeof window !== "undefined" ? localStorage.getItem("token") : null
 
-    //await new Promise(resolve => setTimeout(resolve, 5000))
-
-    const response = await fetch(`${process.env.BACKEND_URL}/api/v1/hotels` , { next : { tags : ['cars'] }})
+    const response = await fetch(`${process.env.BACKEND_URL}/api/v1/hotels` , { 
+        headers: {
+            "Content-Type": "application/json",
+            ...(token ? { "Authorization": `Bearer ${token}` } : {}) 
+        },
+        next : { tags : ['hotels'] }
+    })
 
     if(!response.ok) throw new Error("Failed to fetch hotels")
+    
 
     return await response.json()
 }

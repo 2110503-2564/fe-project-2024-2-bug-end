@@ -10,7 +10,7 @@ export interface BookingItem {
 export interface HotelItem {
     id: string
     hotelName: string
-    picture: string
+    image: string
 }
 
 export interface HotelJson {

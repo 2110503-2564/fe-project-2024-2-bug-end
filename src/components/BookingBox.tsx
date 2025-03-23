@@ -1,6 +1,6 @@
 "use client"
 
-import { Button, MenuItem, TextField } from "@mui/material"
+import { Button, MenuItem, Select } from "@mui/material"
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs, { Dayjs } from "dayjs";
@@ -8,9 +8,9 @@ import { useState } from "react";
 
 export default function BookingBox() {
 
-    const [location, setLocation] = useState("");
-    const [checkInDate, setCheckInDate] = useState<Dayjs | null>(dayjs());
-    const [checkOutDate, setCheckOutDate] = useState<Dayjs | null>(dayjs().add(1, "day"));
+    const [hotel, setHotel] = useState("")
+    const [checkInDate, setCheckInDate] = useState<Dayjs | null>(dayjs())
+    const [checkOutDate, setCheckOutDate] = useState<Dayjs | null>(dayjs().add(1, "day"))
 
     return (
         <div className="bg-white shadow-lg rounded-lg p-6 max-w-4xl mx-auto mt-10 mb-[150px]">
@@ -20,19 +20,24 @@ export default function BookingBox() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <TextField 
-                    label="Enter a destination or property" 
-                    variant="outlined" 
-                    fullWidth
-                    value={location} 
-                    onChange={(e) => setLocation(e.target.value)}
-                />
+                <Select 
+                    variant="standard"
+                    name="hotel"
+                    id="hotel"
+                    value={hotel}
+                    onChange={(e) => { setHotel(e.target.value) }}
+                    className="w-full"
+                >
+                    <MenuItem value="H1">Hotel1</MenuItem>
+                    <MenuItem value="H2">Hotel2</MenuItem>
+                    <MenuItem value="H3">Hotel3</MenuItem>
+                </Select>
 
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker 
                         label="Check-in Date" 
                         value={checkInDate} 
-                        onChange={setCheckInDate} 
+                        onChange={(value) => setCheckInDate(value)}
                     />
                 </LocalizationProvider>
 
@@ -40,12 +45,11 @@ export default function BookingBox() {
                     <DatePicker 
                         label="Check-out Date" 
                         value={checkOutDate} 
-                        onChange={setCheckOutDate} 
+                        onChange={(value) => setCheckOutDate(value)} 
                     />
                 </LocalizationProvider>
             </div>
 
-            {/* Search Button */}
             <div className="flex justify-center mt-4">
                 <Button 
                     variant="contained" 

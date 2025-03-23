@@ -26,8 +26,13 @@ export default async function userRegister( {
 
     if(!response.ok) throw new Error("Failed to register")
 
+    const responseData = await response.json()
+    console.log("Register response:", responseData)
+
     const signInResponse = await userLogIn(userEmail, userPassword)
-    if (signInResponse?.error) throw new Error("Login failed");
+    console.log("signIn response : ", JSON.stringify(signInResponse))
+
+    if (signInResponse?.error) throw new Error("Login failed")
 
     return signInResponse
 }

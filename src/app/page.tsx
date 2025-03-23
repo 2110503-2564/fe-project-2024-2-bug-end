@@ -8,10 +8,10 @@ export default function Home() {
       <Banner />
       <BookingBox />
       <div style={{margin:"20px" , display:"flex" , flexDirection:"row" , alignContent:"space-around" , justifyContent:"space-around" , flexWrap:"wrap"}}>
-        <HotelCard />
-        <HotelCard />
-        <HotelCard />
-        <HotelCard />
+        <HotelCard hotelName="Hotel 1" imgSrc="/img/hotel1.png"/>
+        <HotelCard hotelName="Hotel 2" imgSrc="/img/hotel1.png"/>
+        <HotelCard hotelName="Hotel 3" imgSrc="/img/hotel1.png"/>
+        <HotelCard hotelName="Hotel 4" imgSrc="/img/hotel1.png"/>
       </div>
     </main>
   );

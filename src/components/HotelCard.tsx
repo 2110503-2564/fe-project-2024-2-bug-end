@@ -1,18 +1,19 @@
 import Image from 'next/image'
-import styles from './productcard.module.css'
+import InteractiveCard from './InteractiveCard'
 
-export default function ProductCard() {
+export default function HotelCard({ hotelName , imgSrc } 
+: { hotelName : string , imgSrc : string }) {
     return (
-        <div className="w-[250px] h-[300px] bg-white shadow-lg rounded-xl pt-2">
-            <div className="w-full h-[70%] relative">
+        <InteractiveCard contentName={ hotelName }>
+            <div className="w-full h-[70%] relative rounded-t-lg">
                 <Image 
-                    src={'/img/hotel1.png'}
-                    alt='Hotel'
+                    src={ imgSrc }
+                    alt='Hotel picture'
                     fill
-                    objectFit='cover'
+                    className='object-cover rounded-lg'
                 />
             </div>
-            <div className="p-[10px] h-[30%]">Hotel 1</div>
-        </div>
+            <div className="w-full p-[10px] h-[30%]">{ hotelName }</div>
+        </InteractiveCard>
     )
 }

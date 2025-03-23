@@ -11,10 +11,9 @@ export default function BookingBox() {
     const [location, setLocation] = useState("");
     const [checkInDate, setCheckInDate] = useState<Dayjs | null>(dayjs());
     const [checkOutDate, setCheckOutDate] = useState<Dayjs | null>(dayjs().add(1, "day"));
-    const [guests, setGuests] = useState(1);
 
     return (
-        <div className="bg-white shadow-lg rounded-lg p-6 max-w-4xl mx-auto mt-10">
+        <div className="bg-white shadow-lg rounded-lg p-6 max-w-4xl mx-auto mt-10 mb-[150px]">
             <div className="flex space-x-4 mb-4">
                 <Button variant="outlined" className="rounded-full px-4 py-1">Overnight Stays</Button>
                 <Button variant="outlined" className="rounded-full px-4 py-1">Day Use Stays</Button>
@@ -44,21 +43,6 @@ export default function BookingBox() {
                         onChange={setCheckOutDate} 
                     />
                 </LocalizationProvider>
-
-                <TextField
-                    select
-                    label="Guests"
-                    value={guests}
-                    onChange={(e) => setGuests(Number(e.target.value))}
-                    variant="outlined"
-                    fullWidth
-                >
-                    {[1, 2, 3, 4, 5].map((num) => (
-                        <MenuItem key={num} value={num}>
-                            {num} {num === 1 ? "Adult" : "Adults"}
-                        </MenuItem>
-                    ))}
-                </TextField>
             </div>
 
             {/* Search Button */}

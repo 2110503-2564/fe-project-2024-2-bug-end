@@ -19,3 +19,14 @@ export interface HotelJson {
     count: number
     data: HotelItem[]
 }
+
+export interface BookingItem {
+    _id: string
+    hotel: {
+        name: string
+        address: string
+        telephoneNumber: string
+    };
+    checkIn: string
+    checkOut: string
+}

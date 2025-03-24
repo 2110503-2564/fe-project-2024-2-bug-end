@@ -2,7 +2,7 @@ import Link from "next/link"
 import HotelCard from "./HotelCard"
 import { HotelItem, HotelJson } from "../../interfaces"
 
-export default async function HotelPanel({ HotelJson } : { HotelJson : HotelJson }) {
+export default async function CardPanel({ HotelJson } : { HotelJson : HotelJson }) {
 
     const hotelJsonReady = await HotelJson
 
@@ -14,7 +14,7 @@ export default async function HotelPanel({ HotelJson } : { HotelJson : HotelJson
             <div className="m-[20px] flex flex-row content-around justify-around flex-wrap p-[10px]">
                 {
                     hotelJsonReady.data.map((HotelItem:HotelItem) => (
-                        <Link href={`/hotel/${ HotelItem.id }`} className="w-1/5 min-w-[200px] p-2">
+                        <Link href={`/hotel/${ HotelItem.id }`} className="w-[100%] sm:w-[50%] md:w-[30%] lg:w-[20%] p-2 sm:p-4 md:p-4 lg:p-8">
                             <HotelCard hotelName={ HotelItem.name } imgSrc={ HotelItem.image }/>
                         </Link>
                     ))

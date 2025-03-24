@@ -1,10 +1,10 @@
-export default async function getHotels() {
-    const token = typeof window !== "undefined" ? localStorage.getItem("token") : null
+export default async function getBookings(token : string) {
     
-    const response = await fetch(`${process.env.BACKEND_URL}/api/v1/hotels` , { 
+    const response = await fetch(`${process.env.BACKEND_URL}/api/v1/bookings` , { 
+        method: "GET",
         headers: {
             "Content-Type": "application/json",
-            ...(token ? { "Authorization": `Bearer ${token}` } : {}) 
+            Authorization : `Bearer ${token}`
         },
         cache: "no-store"
     })

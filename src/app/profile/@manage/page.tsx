@@ -1,7 +1,9 @@
+import Link from "next/link";
+
 export default function ManagePage() {
     return (
         <main>
-            <div>Your Booking</div>
+            
         </main>
     )
 }

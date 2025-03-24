@@ -4,7 +4,6 @@ import HotelPanel from "@/components/HotelPanel";
 import getHotels from "@/libs/getHotels";
 import { Suspense } from "react";
 import { LinearProgress } from "@mui/material";
-import CardPanel2 from "@/components/hotelscroll";
 
 export default async function Home() {
 
@@ -13,7 +12,7 @@ export default async function Home() {
   return (
     <main>
       <Banner />
-      <BookingBox />
+      <BookingBox HotelJson={hotels}/>
       <Suspense fallback={ <p>Loading... <LinearProgress /></p> }>
         <HotelPanel HotelJson={hotels}/>
       </Suspense>

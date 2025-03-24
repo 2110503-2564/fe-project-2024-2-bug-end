@@ -1,8 +1,10 @@
 import Image from 'next/image'
 import TopMenuItem from './TopMenuItem';
+import TopMenuItemDropdown from './TopMenuItemDropDown';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
 import { Link } from '@mui/material';
+import { useState } from 'react';
 
 export default async function TopMenu() {
 
@@ -25,14 +27,25 @@ export default async function TopMenu() {
             <TopMenuItem title='Hotel & Home' pageRef='/'/>
             <TopMenuItem title='About us' pageRef='/about'/>
 
-            <div className='flex flex-row absolute right-0 h-full'>
-                <TopMenuItem title='Cart' pageRef='/cart'/>
-                <TopMenuItem title='Register' pageRef='/register'/>
+            <div className='flex flex-row fixed absolute right-0 h-full'>
+                
             {
                 session? 
-                <TopMenuItem title={`Sign-Out of ${session.user?.name ?? 'User'}`} pageRef='/api/auth/signout'/>
+                <TopMenuItemDropdown title={session.user.name} subItems={[
+                    { label: "Profile", href: "/profile" },
+                    { label: "My Booking" , href: "/booking"},
+                    { label: "Sign-Out", href: "/api/auth/signout" }
+                ]}
+                />
                 :
                 <TopMenuItem title={`Sign-In`} pageRef='/api/auth/signin'/>
+            }
+            
+            {
+                session? 
+                null
+                :
+                <TopMenuItem title='Register' pageRef='/register'/>
             }
                 
             </div>

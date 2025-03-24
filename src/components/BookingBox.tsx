@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useSession } from "next-auth/react";
-import { Button, MenuItem, Select } from "@mui/material"
+import { Button, MenuItem, Select, InputLabel, FormControl } from "@mui/material"
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs, { Dayjs } from "dayjs";
@@ -52,33 +52,35 @@ export default function BookingBox({ HotelJson } : { HotelJson : HotelJson }) {
     }
 
     return (
-        <div className="bg-white shadow-lg rounded-lg p-6 max-w-4xl mx-auto mt-10 mb-[50px]">
-            <div className="flex space-x-4 mb-4">
-                <Button variant="outlined" className="rounded-full px-4 py-1">Overnight Stays</Button>
-                <Button variant="outlined" className="rounded-full px-4 py-1">Day Use Stays</Button>
+        <div className="bg-white shadow-lg rounded-lg p-6 max-w-4xl mx-auto mt-10 mb-[50px] ring">
+            <div className="mb-4 text-xl font-bold text-center">
+                Make your booking here!
             </div>
 
             <form onSubmit={handleBooking}>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <Select 
-                        variant="outlined"
-                        name="hotel"
-                        id="hotel"
-                        value={hotel}
-                        onChange={(e) => { setHotel(e.target.value) }}
-                        className="w-full"
-                        MenuProps={{
-                            disableScrollLock: true
-                        }}  
-                    >
-                        {
-                            HotelJson.data.map((hotelItem: HotelItem) => (
-                                <MenuItem key={hotelItem.id} value={hotelItem.id}>
-                                    {hotelItem.name}
-                                </MenuItem>
-                            ))
-                        }   
-                    </Select>
+                    <FormControl fullWidth>
+                        <InputLabel id="hotel-label">Hotel</InputLabel>
+                        <Select 
+                            labelId="hotel-label" 
+                            name="hotel"
+                            id="hotel"
+                            value={hotel}
+                            onChange={(e) => { setHotel(e.target.value) }}
+                            className="w-full"
+                            MenuProps={{
+                                disableScrollLock: true
+                            }}  
+                        >
+                            {
+                                HotelJson.data.map((hotelItem: HotelItem) => (
+                                    <MenuItem key={hotelItem.id} value={hotelItem.id}>
+                                        {hotelItem.name}
+                                    </MenuItem>
+                                ))
+                            }   
+                        </Select>
+                    </FormControl>
 
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DatePicker 

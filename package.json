@@ -14,7 +14,6 @@
     "@mui/material": "^5.16.7",
     "@mui/system": "^6.4.8",
     "@mui/x-date-pickers": "^7.13.0",
-    "@reduxjs/toolkit": "^2.2.8",
     "bcryptjs": "^3.0.2",
     "dayjs": "^1.11.13",
     "mongoose": "^7.8.6",
@@ -23,8 +22,6 @@
     "react": "^18",
     "react-dom": "^18",
     "react-material-ui-carousel": "^3.4.2",
-    "react-redux": "^9.1.2",
-    "redux-persist": "^6.0.0",
     "swiper": "^11.2.6",
     "tailwind-scrollbar-hide": "^2.0.0"
   },

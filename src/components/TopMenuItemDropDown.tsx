@@ -30,6 +30,7 @@ export default function TopMenuItemDropdown({ title, subItems }: { title: string
                     anchorEl={anchorEl}
                     open={Boolean(anchorEl)}
                     onClose={handleClose}
+                    disableScrollLock={true}
                 >
                     {subItems.map((item, index) => (
                         <MenuItem key={index} onClick={handleClose}>

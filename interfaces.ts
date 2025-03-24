@@ -1,12 +1,3 @@
-export interface BookingItem {
-    HotelId: string
-    hotelName: string
-    numOfDays: number
-    checkInDate: string
-    checkOutDate: string
-    location: string
-}
-
 export interface HotelItem {
     id: string
     name: string
@@ -29,4 +20,8 @@ export interface BookingItem {
     };
     checkIn: string
     checkOut: string
+    user: {
+        name: string
+        email: string
+    }
 }

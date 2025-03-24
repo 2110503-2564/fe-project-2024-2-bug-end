@@ -7,7 +7,7 @@ export default async function HotelDetailPage({ params } : { params: { hid: stri
 
     return (
         <main className="text-center p-5">
-            <h1 className="text-lg font-medium">Hotel ID { hotelDetail.data.id }</h1>
+            <h1 className="text-lg font-medium">{ hotelDetail.data.name }</h1>
             <div className="flex flex-row my-5">
                 <Image 
                     src={ hotelDetail.data.image }
@@ -17,7 +17,7 @@ export default async function HotelDetailPage({ params } : { params: { hid: stri
                     sizes="100vw"
                     className="rounded-lg w-[30%] bg-blaack"
                 />
-                <div className="text-md mx-5">{ hotelDetail.data.hotelName }</div>
+                <div className="text-md mx-5">{ hotelDetail.data.name }</div>
             </div>
         </main>
     )

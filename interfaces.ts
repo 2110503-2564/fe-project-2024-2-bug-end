@@ -9,7 +9,9 @@ export interface BookingItem {
 
 export interface HotelItem {
     id: string
-    hotelName: string
+    name: string
+    address: string
+    telephoneNumber : string
     image: string
 }
 

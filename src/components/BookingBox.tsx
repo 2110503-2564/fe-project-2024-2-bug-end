@@ -13,7 +13,7 @@ export default function BookingBox() {
     const [checkOutDate, setCheckOutDate] = useState<Dayjs | null>(dayjs().add(1, "day"))
 
     return (
-        <div className="bg-white shadow-lg rounded-lg p-6 max-w-4xl mx-auto mt-10 mb-[150px]">
+        <div className="bg-white shadow-lg rounded-lg p-6 max-w-4xl mx-auto mt-10 mb-[50px]">
             <div className="flex space-x-4 mb-4">
                 <Button variant="outlined" className="rounded-full px-4 py-1">Overnight Stays</Button>
                 <Button variant="outlined" className="rounded-full px-4 py-1">Day Use Stays</Button>
@@ -21,12 +21,12 @@ export default function BookingBox() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <Select 
-                    variant="standard"
+                    variant="outlined"
                     name="hotel"
                     id="hotel"
                     value={hotel}
                     onChange={(e) => { setHotel(e.target.value) }}
-                    className="w-full"
+                    className="w-full"  
                 >
                     <MenuItem value="H1">Hotel1</MenuItem>
                     <MenuItem value="H2">Hotel2</MenuItem>

@@ -1,8 +1,8 @@
 'use client'
 
 import { useState , useEffect } from "react";
-import Image from "next/image";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 export default function Banner() {
 
@@ -10,6 +10,7 @@ export default function Banner() {
     const [index , setIndex] = useState(0)
     const [fade, setFade] = useState(false)
     const { data : session } = useSession()
+    console.log(session)
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -38,14 +39,6 @@ export default function Banner() {
                 <h1 className="text-4xl font-medium">See The World for Yourself</h1>
                 <h3 className="text-xl font-serif">Make Your Great Trip with us</h3>
             </div>
-
-            {
-                session ? 
-                <div className="z-40 absolute top-10 right-10 font-semibold text-cyan-800 text-xl">
-                    Hello { session.user?.name }
-                </div> 
-                : null
-            }
         </div>
     );
 }

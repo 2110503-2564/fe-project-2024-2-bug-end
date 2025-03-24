@@ -7,6 +7,7 @@ export default async function getHotel(id:string) {
             'Content-Type': 'application/json',
             ...(token ? { "Authorization": `Bearer ${token}` } : {})
         },
+        cache: "no-store"
     })
 
     if(!response.ok) throw new Error("Failed to fetch hotel")

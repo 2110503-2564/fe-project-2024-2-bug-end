@@ -13,7 +13,7 @@ export default function HotelCard({ hotelName , imgSrc }
                     className='object-cover rounded-lg'
                 />
             </div>
-            <div className="w-full p-[10px] h-[30%]">{ hotelName }</div>
+            <div className="w-full p-[10px] h-[30%] text-center font-bold">{ hotelName }</div>
         </InteractiveCard>
     )
 }

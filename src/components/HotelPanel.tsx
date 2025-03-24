@@ -14,7 +14,7 @@ export default async function HotelPanel({ HotelJson } : { HotelJson : HotelJson
             <div className="m-[20px] flex flex-row content-around justify-around flex-wrap p-[10px]">
                 {
                     hotelJsonReady.data.map((HotelItem:HotelItem) => (
-                        <Link href={`/hotel/${ HotelItem.id }`} className="w-1/5">
+                        <Link href={`/hotel/${ HotelItem.id }`} className="w-1/5 min-w-[200px] p-2">
                             <HotelCard hotelName={ HotelItem.name } imgSrc={ HotelItem.image }/>
                         </Link>
                     ))

@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import createHotel from "@/libs/createHotel";
 import getUserProfile from "@/libs/getUserProfile";
-import Link from "next/link";
 
 export default function ManagePage() {
 

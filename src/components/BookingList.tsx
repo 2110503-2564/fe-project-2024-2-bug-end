@@ -41,18 +41,31 @@ export default function BookingList() {
             const token = session?.user.token
             if(!token) throw new Error("Please login first")
 
+            if (!checkIn || !checkOut) {
+                setError("Please select both check-in and check-out dates.");
+                return;
+            }
+
+            const checkInDate = new Date(checkIn);
+            const checkOutDate = new Date(checkOut);
+            const diffDays = (checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 60 * 60 * 24);
+
+            if (checkInDate >= checkOutDate) {
+                setError("Check-in date must be before check-out date.");
+                return;
+            }
+
+            if (diffDays > 3) {
+                setError("Check-in and check-out dates must be within 3 days.");
+                return;
+            }
+
             const updatedBooking = await updateBooking(token, selectedBooking._id, {
                 user: selectedBooking.user,
                 hotel: selectedBooking.hotel,
                 checkIn,
                 checkOut
             })
-
-            if(checkIn && checkOut) {
-                
-            }
-
-            console.log("Updated booking response:", updatedBooking)
 
             if (!updatedBooking?.data) throw new Error("Update failed")
 

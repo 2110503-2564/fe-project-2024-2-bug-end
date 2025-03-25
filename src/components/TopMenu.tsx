@@ -13,10 +13,6 @@ export default async function TopMenu() {
         ? null 
         : await getUserProfile(session.user.token);
 
-    console.log('---------------------------------');
-    console.log('User Profile:', JSON.stringify(profile));
-    console.log(profile?.data?.role || "No role available");
-
     return (
         <div className="h-[50px] bg-white fixed top-0 left-0 right-0 z-30 flex flex-row">
             <Link href='/'>

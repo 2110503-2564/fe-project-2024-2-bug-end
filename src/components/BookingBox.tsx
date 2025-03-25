@@ -58,7 +58,6 @@ export default function BookingBox({ HotelJson } : { HotelJson : HotelJson }) {
     
             if (response?.status === 201) {
                 setSuccessMessage("Booking successful!")
-                console.log(response)
             }
 
         } catch(err : any) {

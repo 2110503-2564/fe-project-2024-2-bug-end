@@ -6,7 +6,6 @@ export default async function getBookings(token : string) {
             "Content-Type": "application/json",
             Authorization : `Bearer ${token}`
         },
-        cache: "no-store"
     })
 
     if (!response.ok) {

@@ -20,7 +20,7 @@ export default function RegisterPage() {
         try {
             const user = await userRegister({userName : name , userTel: tel , userEmail : email , userPassword : password})
 
-            router.push('/')
+            router.push('/api/auth/signin')
         } catch(err) {
             setError("Failed to register. Please try again later.")
             console.log(err)

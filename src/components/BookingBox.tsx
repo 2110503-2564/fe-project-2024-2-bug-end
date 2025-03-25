@@ -18,11 +18,15 @@ export default function BookingBox({ HotelJson } : { HotelJson : HotelJson }) {
     const [checkOutDate, setCheckOutDate] = useState<Dayjs | null>(dayjs().add(1, "day"))
     const [error, setError] = useState<string | null>(null)
     const [successMessage, setSuccessMessage] = useState<string | null>(null)
+    
+    if(!session) return
 
     const handleBooking = async (e : React.FormEvent) => {
         e.preventDefault()
         setError(null)
         setSuccessMessage(null)
+
+        console.log("aaa :::::" , session.user.token)
 
         if(!hotel || !checkInDate || !checkOutDate) {
             setError("Please fill all the fields")
@@ -40,9 +44,7 @@ export default function BookingBox({ HotelJson } : { HotelJson : HotelJson }) {
             return
         }
 
-        const token = session?.user.token
-
-        if(!token) {
+        if(!session.user.token) {
             setError("Please login first")
             return
         }
@@ -54,7 +56,7 @@ export default function BookingBox({ HotelJson } : { HotelJson : HotelJson }) {
         }
 
         try {
-            const response = await createBooking(token , data)
+            const response = await createBooking(session.user.token , data)
     
             if (response?.status === 201) {
                 setSuccessMessage("Booking successful!")

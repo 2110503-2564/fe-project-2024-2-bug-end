@@ -8,26 +8,30 @@ import getUserProfile from "@/libs/getUserProfile";
 import deleteBooking from "@/libs/deleteBooking";
 import updateBooking from "@/libs/updateBooking";
 
-export default function BookingList() {
-    const { data: session, status } = useSession();
+export default async function BookingList() {
+    const { data: session, status, update } = useSession();
     const [bookings, setBookings] = useState<BookingItem[]>([]);
     const [profile, setProfile] = useState<UserProfile | null>(null);
-    const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [showPopup, setShowPopup] = useState<boolean>(false);
-    const [selectedBooking, setSelectedBooking] = useState<BookingItem | null>(null); // Store the selected booking
+    const [selectedBooking, setSelectedBooking] = useState<BookingItem | null>(null);
     const [isUpdating, setIsUpdating] = useState<boolean>(false);
     const [checkIn, setCheckIn] = useState<string>("");
     const [checkOut, setCheckOut] = useState<string>("");
+    const [token , setToken] = useState<string>()
+
+    if(session) {
+        setToken(session.user.token)
+    }
 
     const handleRemoveBooking = async () => {
         if (!selectedBooking) return
         try {
-            const token = session?.user.token;
+            //const token = session?.user.token;
             if (!token) throw new Error("Please login first");
             await deleteBooking(token, selectedBooking._id);
             setBookings((prevBookings) => prevBookings.filter((booking) => booking._id !== selectedBooking._id));
-            setShowPopup(false); // Close the popup after deletion
+            setShowPopup(false);
         } catch (err) {
             console.error("Failed to delete booking:", err);
             setError("Failed to delete booking. Please try again.");
@@ -38,12 +42,12 @@ export default function BookingList() {
     const handleUpdateBooking = async () => {
         if(!selectedBooking) return
         try {
-            const token = session?.user.token
+            //const token = session?.user.token
             if(!token) throw new Error("Please login first")
 
             if (!checkIn || !checkOut) {
                 setError("Please select both check-in and check-out dates.");
-                return;
+                return
             }
 
             const checkInDate = new Date(checkIn);
@@ -52,12 +56,12 @@ export default function BookingList() {
 
             if (checkInDate >= checkOutDate) {
                 setError("Check-in date must be before check-out date.");
-                return;
+                return
             }
 
             if (diffDays > 3) {
                 setError("Check-in and check-out dates must be within 3 days.");
-                return;
+                return
             }
 
             const updatedBooking = await updateBooking(token, selectedBooking._id, {
@@ -69,67 +73,62 @@ export default function BookingList() {
 
             if (!updatedBooking?.data) throw new Error("Update failed")
 
-            const updatedBookings = await getBookings(session.user.token);
+            const updatedBookings = await getBookings(token);
             setBookings(updatedBookings.data);
-            setShowPopup(false)
+            sessionStorage.setItem("bookings", JSON.stringify(updatedBookings.data))
 
         } catch(err) {
             console.error("Failed to update booking:", err);
             setError("Failed to update booking. Please try again.");
-            window.location.reload();
         }
     }
 
     const openDeletePopup = (booking: BookingItem) => {
-        setSelectedBooking(booking); // Set the selected booking
+        setSelectedBooking(booking)
         setIsUpdating(false)
         setShowPopup(true);
     };
 
     const openUpdatePopup = (booking: BookingItem) => {
         setSelectedBooking(booking);
-        setCheckIn(booking.checkIn.split("T")[0]); // แปลง format วัน
-        setCheckOut(booking.checkOut.split("T")[0]);
+        setCheckIn(booking.checkIn.split("T")[0])
+        setCheckOut(booking.checkOut.split("T")[0])
         setIsUpdating(true);
         setShowPopup(true);
     };
 
     const closePopup = () => {
-        setShowPopup(false);
-        setSelectedBooking(null); // Clear the selected booking
+        setShowPopup(false)
+        setSelectedBooking(null)
     };
 
     useEffect(() => {
         if (status === "authenticated" && session?.user?.token) {
-            setLoading(true);
             setError(null);
 
             const storageBookings = sessionStorage.getItem("bookings")
             if(storageBookings) {
                 setBookings(JSON.parse(storageBookings))
-                setLoading(false)
             } else {
                 getUserProfile(session.user.token)
                 .then((profileData) => {
-                    setProfile(profileData.data); // Ensure profile matches UserProfile
-                    return getBookings(session.user.token);
+                    setProfile(profileData.data)
+                    return getBookings(session.user.token)
                 })
                 .then((bdata) => {
-                    setBookings(bdata.data);
+                    setBookings(bdata.data)
                 })
                 .catch((err) => {
                     console.error(err);
                     setError("Failed to load bookings.");
                 })
-                .finally(() => setLoading(false));
             }
         } else {
-            setLoading(false);
             setError("Please log in to view bookings.");
         }
     }, [session, status]);
 
-    if (loading) return <div>Loading...</div>;
+    if (!bookings.length && status === "loading") return <div>Loading...</div>
     if (error) return <div>{error}</div>;
 
     return (

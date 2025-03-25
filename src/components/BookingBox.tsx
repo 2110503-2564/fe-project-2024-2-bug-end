@@ -77,6 +77,7 @@ export default function BookingBox({ HotelJson } : { HotelJson : HotelJson }) {
                         <InputLabel id="hotel-label">Hotel</InputLabel>
                         <Select 
                             labelId="hotel-label" 
+                            label="Hotel"
                             name="hotel"
                             id="hotel"
                             value={hotel}

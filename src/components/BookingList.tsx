@@ -48,6 +48,10 @@ export default function BookingList() {
                 checkOut
             })
 
+            if(checkIn && checkOut) {
+                
+            }
+
             console.log("Updated booking response:", updatedBooking)
 
             if (!updatedBooking?.data) throw new Error("Update failed")

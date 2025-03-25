@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function ManageReservations() {
     return (
         <main className="text-center text-2xl font-bold">

@@ -1,6 +1,7 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import getUserProfile from "@/libs/getUserProfile";
 import { getServerSession } from "next-auth";
+import Link from "next/link";
 
 
 export default async function Dashboard() {
@@ -20,6 +21,12 @@ export default async function Dashboard() {
                 <tr><td>Member Since</td><td>{ createdAt.toString() }</td></tr>
 
             </tbody></table>
+
+            <Link href={"/booking"}>
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-4 p-2 rounded">
+                    My Booking
+                </button>
+            </Link>
         </main>
     )
 }

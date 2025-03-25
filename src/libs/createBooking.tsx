@@ -14,5 +14,10 @@ export default async function createBooking(token : string , data : any) {
         throw new Error(errorData?.error || "Failed to create booking")
     }
 
-    return await response.json()
+    const responseData = await response.json()
+
+    return {
+        status: response.status,
+        data: responseData,
+    }
 }

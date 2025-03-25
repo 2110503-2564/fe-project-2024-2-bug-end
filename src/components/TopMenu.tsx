@@ -3,8 +3,7 @@ import TopMenuItem from './TopMenuItem';
 import TopMenuItemDropdown from './TopMenuItemDropDown';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
-import { Link } from '@mui/material';
-import { useState } from 'react';
+import Link from 'next/link'
 
 export default async function TopMenu() {
 
@@ -18,9 +17,9 @@ export default async function TopMenu() {
                 <Image 
                     src={'/img/logo.png'} 
                     className="h-full w-auto rounded-br-sm rounded-tr-sm"
-                    alt='logo' 
-                    width={0} 
-                    height={0} 
+                    alt='logo'
+                    width={0}
+                    height={0}
                     sizes="100vh"
                 />
             </Link>
@@ -47,9 +46,7 @@ export default async function TopMenu() {
                 :
                 <TopMenuItem title='Register' pageRef='/register'/>
             }
-                
             </div>
-            
         </div>
     );
 }

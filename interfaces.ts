@@ -25,3 +25,12 @@ export interface BookingItem {
         email: string
     }
 }
+
+export interface UserProfile {
+    _id: string;
+    name: string;
+    email: string;
+    role: string;
+    createdAt: string;
+    telephoneNumber: string;
+}

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { Button, MenuItem, Select, InputLabel, FormControl } from "@mui/material"
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
@@ -18,15 +18,16 @@ export default function BookingBox({ HotelJson } : { HotelJson : HotelJson }) {
     const [checkOutDate, setCheckOutDate] = useState<Dayjs | null>(dayjs().add(1, "day"))
     const [error, setError] = useState<string | null>(null)
     const [successMessage, setSuccessMessage] = useState<string | null>(null)
-    
-    if(!session) return
 
     const handleBooking = async (e : React.FormEvent) => {
         e.preventDefault()
         setError(null)
         setSuccessMessage(null)
 
-        console.log("aaa :::::" , session.user.token)
+        if(!session) {
+            setError("Please login first")
+            return
+        }
 
         if(!hotel || !checkInDate || !checkOutDate) {
             setError("Please fill all the fields")
